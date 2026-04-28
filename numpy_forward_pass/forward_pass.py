@@ -1,10 +1,5 @@
 import numpy as np
-
-def relu(x):
-    return np.maximum(0, x)
-
-def sigmoid(x):
-    return 1/(1 + np.exp(-1))
+from activation_fn import relu, sigmoid
 
 def mlp_forward(input, params):
     w1, b1 = params['w1'], params['b1']
