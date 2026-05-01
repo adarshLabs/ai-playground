@@ -61,9 +61,9 @@ def main():
     Y = np.array([[0], [1], [1], [0]], dtype=np.float32)
 
     params = {
-        'w1': np.random.randn(input_dim, hidden_dim) * np.sqrt(2.0/input_dim),
+        'w1': np.random.randn(input_dim, hidden_dim),
         'b1': np.zeros(hidden_dim),
-        'w2': np.random.randn(hidden_dim, output_dim) * np.sqrt(2.0/hidden_dim),
+        'w2': np.random.randn(hidden_dim, output_dim),
         'b2': np.zeros(output_dim)
     }
 
