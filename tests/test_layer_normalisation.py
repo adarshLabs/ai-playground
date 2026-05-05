@@ -2,7 +2,8 @@ import unittest
 
 import numpy as np
 
-from normalisation.layer_normalisation import LayerNorm
+
+from Normalisation.layer_normalisation import LayerNorm
 
 
 class TestLayerNorm(unittest.TestCase):
