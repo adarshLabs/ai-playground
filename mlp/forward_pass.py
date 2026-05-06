@@ -1,14 +1,9 @@
 import numpy as np
 
-try:
-    import torch
-except ImportError:
-    torch = None
+import torch
 
-try:
-    from .activation_functions import relu, sigmoid
-except ImportError:
-    from activation_functions import relu, sigmoid
+
+from .activation_functions import relu, sigmoid
 
 
 def np_forward(inputs, params):

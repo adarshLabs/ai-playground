@@ -1,9 +1,8 @@
 import numpy as np
 
-try:
-    from .forward_pass import np_forward
-except ImportError:
-    from forward_pass import np_forward
+
+from .forward_pass import np_forward
+
 
 
 def backpropagation(Y, cache, params):
