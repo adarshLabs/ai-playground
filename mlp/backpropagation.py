@@ -1,6 +1,10 @@
 import numpy as np
 
-from forward_pass import np_forward
+try:
+    from .forward_pass import np_forward
+except ImportError:
+    from forward_pass import np_forward
+
 
 def backpropagation(Y, cache, params):
     X, z1, a1, z2, a2 = cache
@@ -44,8 +48,8 @@ def main():
     output_dim = 1
 
     np.random.seed(42)
-    input = np.random.randn(batch_size, input_dim)
-    output = np.random.randn(batch_size, output_dim)
+    inputs = np.random.randn(batch_size, input_dim)
+    targets = np.random.randn(batch_size, output_dim)
 
     params = {
         'w1': np.random.randn(input_dim, hidden_dim),
@@ -54,17 +58,16 @@ def main():
         'b2': np.random.randn(output_dim)
     }
 
-    y1, _ = np_forward(input, params)
+    y1, _ = np_forward(inputs, params)
 
-    print(sum(y1-output))
+    print(sum(y1 - targets))
     for i in range(3000):
-        params = steps(input, output, params)
-        if i%100==0:
-            y2, _ = np_forward(input, params)
-            print(i, sum(y2-output))
+        params = steps(inputs, targets, params)
+        if i % 100 == 0:
+            y2, _ = np_forward(inputs, params)
+            print(i, sum(y2 - targets))
 
 
 if __name__ == "__main__":
     main()
-
 

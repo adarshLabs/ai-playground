@@ -1,23 +1,36 @@
 import numpy as np
-from activation_fn import relu, sigmoid
-import torch
 
-def np_forward(input, params):
+try:
+    import torch
+except ImportError:
+    torch = None
+
+try:
+    from .activation_functions import relu, sigmoid
+except ImportError:
+    from activation_functions import relu, sigmoid
+
+
+def np_forward(inputs, params):
     w1, b1 = params['w1'], params['b1']
     w2, b2 = params['w2'], params['b2']
 
-    z1 = input @ w1 + b1
+    z1 = inputs @ w1 + b1
     a1 = relu(z1)
     z2 = a1 @ w2 + b2
     a2 = sigmoid(z2)
-    cache = (input, z1, a1, z2, a2)
+    cache = (inputs, z1, a1, z2, a2)
     return a2, cache
 
-def torch_forward(input, params):
+
+def torch_forward(inputs, params):
+    if torch is None:
+        raise ImportError("torch is required to run torch_forward")
+
     w1, b1 = params['w1'], params['b1']
     w2, b2 = params['w2'], params['b2']
 
-    z1 = input @ w1 + b1
+    z1 = inputs @ w1 + b1
     a1 = torch.relu(z1)
     z2 = a1 @ w2 + b2
     a2 = torch.sigmoid(z2)

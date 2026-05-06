@@ -4,7 +4,7 @@ import numpy as np
 
 
 
-from Normalisation.batch_normalisation import BatchNorm
+from normalization.batch_normalization import BatchNorm
 
 
 class TestBatchNorm(unittest.TestCase):

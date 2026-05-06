@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from Regularisation.dropout import Dropout
+from regularization.dropout import Dropout
 
 
 class TestDropout(unittest.TestCase):

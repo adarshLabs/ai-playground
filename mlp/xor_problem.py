@@ -10,7 +10,7 @@ def sigmoid(x):
 def relu_grad(x):
     return (x > 0).astype(float)
 
-def BCEloss(Y, y_pred):
+def binary_cross_entropy_loss(Y, y_pred):
     eps = 1e-8
     y_pred_clipped = np.clip(y_pred, eps, 1-eps)
     return -np.mean(Y * np.log(y_pred_clipped) + (1-Y) * np.log(1 - y_pred_clipped))
@@ -72,7 +72,7 @@ def main():
     for i in range(epochs+1):
         y_pred, cache = forward(X, params)
         
-        loss = BCEloss(Y, y_pred)
+        loss = binary_cross_entropy_loss(Y, y_pred)
         
         grads = backpropagation(Y, cache, params)
 

@@ -2,10 +2,10 @@ import unittest
 
 import numpy as np
 
-from Regularisation.l1_and_l2 import l1_grad, l1_loss, l2_grad, l2_loss
+from regularization.l1_l2 import l1_grad, l1_loss, l2_grad, l2_loss
 
 
-class TestL1AndL2Regularisation(unittest.TestCase):
+class TestL1AndL2Regularization(unittest.TestCase):
     def test_l1_loss_sums_absolute_weights(self):
         weights = np.array([[1.0, -2.0, 0.0], [3.5, -4.5, 2.0]])
 
@@ -35,7 +35,7 @@ class TestL1AndL2Regularisation(unittest.TestCase):
 
         np.testing.assert_allclose(grad, 0.5 * weights)
 
-    def test_zero_lambda_removes_regularisation_penalty(self):
+    def test_zero_lambda_removes_regularization_penalty(self):
         weights = np.array([[1.0, -2.0], [3.0, -4.0]])
 
         self.assertEqual(l1_loss(weights, lambda_=0.0), 0.0)
