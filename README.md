@@ -3,7 +3,8 @@
 A small NumPy-first playground for learning neural-network building blocks.
 The repository contains compact implementations of MLP forward/backward passes,
 normalization layers, and regularization helpers, with unit tests for the core
-math.
+math. It also includes a PyTorch XOR example for comparing a hand-written
+training loop with a framework-based version.
 
 ## Project Structure
 
@@ -13,7 +14,8 @@ math.
 │   ├── activation_functions.py
 │   ├── backpropagation.py
 │   ├── forward_pass.py
-│   └── xor_problem.py
+│   ├── xor_problem.py
+│   └── xor_pytorch.py
 ├── normalization/
 │   ├── batch_normalization.py
 │   └── layer_normalization.py
@@ -38,8 +40,8 @@ source .venv/bin/activate
 pip install numpy torch
 ```
 
-`torch` is only needed for the comparison demo in `mlp/forward_pass.py`; the
-tested layer and regularization helpers use NumPy.
+`torch` is only needed for the PyTorch demos in `mlp/forward_pass.py` and
+`mlp/xor_pytorch.py`; the tested layer and regularization helpers use NumPy.
 
 ## Run Tests
 
@@ -53,11 +55,22 @@ python -m unittest discover -s tests
 python -m mlp.forward_pass
 python -m mlp.backpropagation
 python -m mlp.xor_problem
+python -m mlp.xor_pytorch
 ```
 
 ## Modules
 
 - `mlp`: simple MLP examples, activation functions, forward pass comparison,
-  backpropagation, and XOR training.
+  backpropagation, NumPy XOR training, and PyTorch XOR training.
 - `normalization`: batch normalization and layer normalization implementations.
 - `regularization`: dropout plus L1/L2 loss and gradient helpers.
+
+## Learning Path
+
+1. Start with `mlp/activation_functions.py` for the basic nonlinearities.
+2. Run `mlp/forward_pass.py` to compare a manual NumPy forward pass with
+   PyTorch.
+3. Read `mlp/backpropagation.py` and `mlp/xor_problem.py` to follow gradient
+   updates by hand.
+4. Run `mlp/xor_pytorch.py` to see the same XOR task expressed with
+   `torch.nn` modules, `BCELoss`, and `optim.SGD`.
