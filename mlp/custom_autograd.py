@@ -1,16 +1,53 @@
 import torch
 
-x = torch.tensor([1., 2., 3.], requires_grad=True)
-print(x.grad_fn)
 
-y = x**2
-print(y.grad_fn)
+class CustomRelu(torch.autograd.Function):
+    @staticmethod
+    def forward(ctx, x):
+        ctx.save_for_backward(x)
 
-z = 3 * y + 1
-print(z.grad_fn)
+        return torch.clamp(x, min=0)
 
-loss = z.sum()
-print(loss.grad_fn)
+    @staticmethod
+    def backward(ctx, grad_output):
+        (input,) = ctx.saved_tensors
+        grad_input = grad_output.clone()
+        grad_input[input <= 0] = 0
 
-loss.backward()
-print(x.grad)
+        return grad_input
+
+
+class CustomSquare(torch.autograd.Function):
+    @staticmethod
+    def forward(ctx, x):
+        ctx.save_for_backward(x)
+
+        return x**2
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        (input,) = ctx.saved_tensors
+
+        return grad_output * 2 * input
+
+
+def main():
+    x = torch.tensor([-2.0, -1.0, 0.0, 2.0, 3.0], requires_grad=True)
+    y = CustomRelu.apply(x)
+    loss = y.sum()
+    loss.backward()
+
+    print("ReLU forward:", y)
+    print("ReLU gradient:", x.grad)
+
+    square_input = torch.tensor([-2.0, -1.0, 0.0, 2.0, 3.0], requires_grad=True)
+    z = CustomSquare.apply(square_input)
+    square_loss = z.sum()
+    square_loss.backward()
+
+    print("Square forward:", z)
+    print("Square gradient:", square_input.grad)
+
+
+if __name__ == "__main__":
+    main()
