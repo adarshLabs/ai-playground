@@ -1,7 +1,7 @@
 import numpy as np
 
 
-from .forward_pass import np_forward
+from mlp.numpy.forward_pass import np_forward
 
 
 
@@ -69,4 +69,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

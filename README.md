@@ -11,11 +11,14 @@ training loop with a framework-based version.
 ```text
 .
 ├── mlp/
-│   ├── activation_functions.py
-│   ├── backpropagation.py
-│   ├── forward_pass.py
-│   ├── xor_problem.py
-│   └── xor_pytorch.py
+│   ├── numpy/
+│   │   ├── activation_functions.py
+│   │   ├── backpropagation.py
+│   │   ├── forward_pass.py
+│   │   └── xor_problem.py
+│   └── pytorch/
+│       ├── custom_autograd.py
+│       └── xor.py
 ├── normalization/
 │   ├── batch_normalization.py
 │   └── layer_normalization.py
@@ -40,8 +43,8 @@ source .venv/bin/activate
 pip install numpy torch
 ```
 
-`torch` is only needed for the PyTorch demos in `mlp/forward_pass.py` and
-`mlp/xor_pytorch.py`; the tested layer and regularization helpers use NumPy.
+`torch` is only needed for the PyTorch demos in `mlp/numpy/forward_pass.py`
+and `mlp/pytorch/`; the tested layer and regularization helpers use NumPy.
 
 ## Run Tests
 
@@ -52,25 +55,27 @@ python -m unittest discover -s tests
 ## Run Examples
 
 ```bash
-python -m mlp.forward_pass
-python -m mlp.backpropagation
-python -m mlp.xor_problem
-python -m mlp.xor_pytorch
+python -m mlp.numpy.forward_pass
+python -m mlp.numpy.backpropagation
+python -m mlp.numpy.xor_problem
+python -m mlp.pytorch.xor
+python -m mlp.pytorch.custom_autograd
 ```
 
 ## Modules
 
-- `mlp`: simple MLP examples, activation functions, forward pass comparison,
-  backpropagation, NumPy XOR training, and PyTorch XOR training.
+- `mlp.numpy`: simple NumPy MLP examples, activation functions, forward pass
+  comparison, backpropagation, and NumPy XOR training.
+- `mlp.pytorch`: PyTorch XOR training and custom autograd examples.
 - `normalization`: batch normalization and layer normalization implementations.
 - `regularization`: dropout plus L1/L2 loss and gradient helpers.
 
 ## Learning Path
 
-1. Start with `mlp/activation_functions.py` for the basic nonlinearities.
-2. Run `mlp/forward_pass.py` to compare a manual NumPy forward pass with
+1. Start with `mlp/numpy/activation_functions.py` for the basic nonlinearities.
+2. Run `mlp/numpy/forward_pass.py` to compare a manual NumPy forward pass with
    PyTorch.
-3. Read `mlp/backpropagation.py` and `mlp/xor_problem.py` to follow gradient
-   updates by hand.
-4. Run `mlp/xor_pytorch.py` to see the same XOR task expressed with
+3. Read `mlp/numpy/backpropagation.py` and `mlp/numpy/xor_problem.py` to follow
+   gradient updates by hand.
+4. Run `mlp/pytorch/xor.py` to see the same XOR task expressed with
    `torch.nn` modules, `BCELoss`, and `optim.SGD`.

@@ -3,7 +3,7 @@ import numpy as np
 import torch
 
 
-from .activation_functions import relu, sigmoid
+from mlp.numpy.activation_functions import relu, sigmoid
 
 
 def np_forward(inputs, params):
